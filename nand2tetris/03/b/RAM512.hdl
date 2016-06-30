@@ -32,4 +32,5 @@ CHIP RAM512 {
     And(a=r4, b=load, out=load4);
     And(a=r5, b=load, out=load5);
     And(a=r6, b=load, out=load6);
-    And(a=r7, b=load, out=load7);}
+    And(a=r7, b=load, out=load7);
+}
