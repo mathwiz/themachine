@@ -1,0 +1,40 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/05/Memory.hdl
+
+/**
+ * The complete address space of the Hack computer's memory,
+ * including RAM and memory-mapped I/O. 
+ * The chip facilitates read and write operations, as follows:
+ *     Read:  out(t) = Memory[address(t)](t)
+ *     Write: if load(t-1) then Memory[address(t-1)](t) = in(t-1)
+ * In words: the chip always outputs the value stored at the memory 
+ * location specified by address. If load==1, the in value is loaded 
+ * into the memory location specified by address. This value becomes 
+ * available through the out output from the next time step onward.
+ * Address space rules:
+ * Only the upper 16K+8K+1 words of the Memory chip are used. 
+ * Access to address>0x6000 is invalid. Access to any address in 
+ * the range 0x4000-0x5FFF results in accessing the screen memory 
+ * map. Access to address 0x6000 results in accessing the keyboard 
+ * memory map. The behavior in these addresses is described in the 
+ * Screen and Keyboard chip specifications given in the book.
+ */
+
+CHIP Memory {
+    IN in[16], load, address[15];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    Mux8Way16(sel=address[12..14], a=memory, b=memory, c=memory, d=memory, e=screen, f=screen, g=keyboard, h=false, out=out);
+    RAM16K(in=in, load=lmem, address=address[0..13], out=memory);
+    Screen(in=in, load=lscr, address=address[0..12], out=screen);
+    Keyboard(out=keyboard);
+    DMux8Way(in=true, sel=address[12..14], a=mem1, b=mem2, c=mem3, d=mem4, e=scr1, f=scr2, g=key, h=none);
+    Or8Way(in[0]=mem1, in[1]=mem2, in[2]=mem3, in[3]=mem4, in[4..7]=false, out=mem);
+    Or8Way(in[0]=scr1, in[1]=scr2, in[2..7]=false, out=scr);
+    And(a=load, b=mem, out=lmem);
+    And(a=load, b=scr, out=lscr);
+}
