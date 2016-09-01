@@ -32,9 +32,9 @@ CHIP Memory {
     RAM16K(in=in, load=lmem, address=address[0..13], out=memory);
     Screen(in=in, load=lscr, address=address[0..12], out=screen);
     Keyboard(out=keyboard);
-    DMux8Way(in=true, sel=address[12..14], a=mem1, b=mem2, c=mem3, d=mem4, e=scr1, f=scr2, g=key, h=none);
-    Or8Way(in[0]=mem1, in[1]=mem2, in[2]=mem3, in[3]=mem4, in[4..7]=false, out=mem);
-    Or8Way(in[0]=scr1, in[1]=scr2, in[2..7]=false, out=scr);
+    Not(in=address[13], out=scrbit);
+    And(a=address[14], b=scrbit, out=scr);
+    Not(in=address[14], out=mem);
     And(a=load, b=mem, out=lmem);
     And(a=load, b=scr, out=lscr);
 }
