@@ -41,8 +41,8 @@ CHIP CPU {
     PARTS:
     // Put your code here:
     ALU(x=D, y=AM, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=alu, out=outM, zr=aluzero, ng=aluneg);
-    Register(in=address, load=loadA, out=A, out[0..14]=addressM);
-    Register(in=alu, load=loadD, out=D);
+    ARegister(in=address, load=loadA, out=A, out[0..14]=addressM);
+    DRegister(in=alu, load=loadD, out=D);
     PC(in=A, load=jmp, inc=nojmp, reset=reset, out[0..14]=pc);
     Mux16(a=instruction, b=alu, sel=cInstruction, out=address);
     Mux16(a=A, b=inM, sel=instruction[12], out=AM);
