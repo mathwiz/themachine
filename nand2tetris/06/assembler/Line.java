@@ -40,6 +40,16 @@ class Line {
         return programLine.length() > 0;
     }
 
+    boolean hasSyntaxError() {
+        if (programLine.length() > 1 && programLine.startsWith("@") && !(programLine.substring(1).matches("\\d+") || validSymbolText(programLine.substring(1)))) {
+            return true;
+        }
+        if (programLine.length() > 2 && programLine.startsWith("(") && programLine.endsWith(")") && !validSymbolText(programLine.substring(1, programLine.length() - 1))) {
+            return true;
+        }
+        return false;
+    }
+
     private static boolean validSymbolText(String s) {
         return SYMBOL.matcher(s).matches();
     }
