@@ -12,8 +12,8 @@ class Line {
             System.out.println("Usage: Line teststring");
         } else {
             Line line = new Line(args[0]);
-            System.out.println(String.format("Line is [%s]. Program Line is [%s]. A Intruction:%s, C Intruction:%s, Symbol:%s, Program:%s",
-                    line.getText(), line.getProgramLine(), line.isAInstruction(), line.isCInstruction(), line.isSymbol(), line.isProgramLine()));
+            System.out.println(String.format("Line is [%s]. Program Line is [%s]. A Intruction:%s, C Intruction:%s, Symbol:%s, Program:%s, Error:%s",
+                    line.getText(), line.getProgramLine(), line.isAInstruction(), line.isCInstruction(), line.isSymbol(), line.isProgramLine(), line.hasSyntaxError()));
         }
     }
 
