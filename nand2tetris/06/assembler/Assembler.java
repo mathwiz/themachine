@@ -10,13 +10,16 @@ public abstract class Assembler {
     protected final FileIO output;
 
     protected Assembler(String filename) {
+        NameHandler files = new NameHandler(filename);
+        source = new FileIO(files.getInputFile());
+        output = new FileIO(files.getOutputFile());
+    }
+
+    public void assemble() {
         try {
-            NameHandler files = new NameHandler(filename);
-            source = new FileIO(files.getInputFile());
-            output = new FileIO(files.getOutputFile());
             List<String> lines = processInput();
             processOutput(lines);
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

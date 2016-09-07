@@ -8,6 +8,7 @@ public final class SinglePassAssembler extends Assembler {
     public static void main(String[] args) {
         System.out.println(String.format("Starting SinglePassAssembler on %s", args[0]));
         SinglePassAssembler assembler = new SinglePassAssembler(args[0]);
+        assembler.assemble();
     }
 
     SinglePassAssembler(String filename) {

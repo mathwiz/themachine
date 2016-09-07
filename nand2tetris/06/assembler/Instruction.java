@@ -10,5 +10,9 @@ abstract class Instruction {
     public final boolean isAInstruction() {
         return this.getClass() == AInstruction.class;
     }
+
+    public String getCode() {
+        return code;
+    }
 }
 
