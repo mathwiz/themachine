@@ -23,4 +23,8 @@ class Code {
     public String toString() {
         return instruction.toString();
     }
+
+    public Instruction getInstruction() {
+        return instruction;
+    }
 }
