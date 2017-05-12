@@ -1,4 +1,5 @@
 *.class
+*.mmo
 
 # Package Files #
 *.jar
